@@ -1,0 +1,6 @@
+web3>=7.14,<9
+ccxt>=4.5,<5
+aiogram>=3.22,<4
+pydantic-settings>=2.11,<3
+aiosqlite>=0.21,<1
+certifi>=2026.10

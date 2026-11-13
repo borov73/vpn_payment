@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vpn-payment"
+version = "1.0.0"
+description = "Personal read-only Base ETH payment tracker and Telegram subscription ledger"
+readme = "README.md"
+license = "GPL-3.0-only"
+license-files = ["LICENSE"]
+requires-python = ">=3.12"
+dynamic = ["dependencies"]
+
+[project.urls]
+Repository = "https://github.com/borov73/vpn_payment"
+Issues = "https://github.com/borov73/vpn_payment/issues"
+
+[project.scripts]
+vpn-payment = "vpn_payment.main:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}
+
+[tool.setuptools.packages.find]
+include = ["vpn_payment*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-ra"
+markers = ["integration: opt-in real read-only network checks"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+ignore = ["E501"]

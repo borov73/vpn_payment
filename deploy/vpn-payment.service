@@ -1,0 +1,40 @@
+[Unit]
+Description=Personal Base VPN payment Telegram bot
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+[Service]
+Type=simple
+User=vpnpayment
+Group=vpnpayment
+WorkingDirectory=/opt/vpn_payment
+EnvironmentFile=/opt/vpn_payment/.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/vpn_payment/.venv/bin/python -m vpn_payment run
+Restart=on-failure
+RestartSec=60
+TimeoutStopSec=60
+KillSignal=SIGTERM
+UMask=0077
+StateDirectory=vpn-payment
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/vpn-payment
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=vpn-payment
+
+[Install]
+WantedBy=multi-user.target

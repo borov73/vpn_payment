@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily VPN payment ledger backup
+
+[Timer]
+OnCalendar=*-*-* 03:00:00 UTC
+RandomizedDelaySec=300
+Persistent=true
+Unit=vpn-payment-backup.service
+
+[Install]
+WantedBy=timers.target
